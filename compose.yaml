@@ -1,0 +1,47 @@
+# Servidor de Minecraft Fabric 26.3 para la Raspberry Pi 4B
+# Ubicación prevista: /mnt/datos/apps/minecraft/
+# Docs de la imagen: https://docker-minecraft-server.readthedocs.io
+
+services:
+  minecraft:
+    # java25 = lo mismo que usa "latest" hoy, pero fijado para que una
+    # actualización de la imagen no cambie la versión de Java sin avisar
+    image: itzg/minecraft-server:java25
+    container_name: minecraft
+    restart: unless-stopped
+    # Tiempo para que el servidor guarde el mundo antes de que Docker lo mate
+    stop_grace_period: 1m
+    ports:
+      - "25565:25565"
+    environment:
+      EULA: "TRUE"
+      TZ: America/Bogota
+
+      # --- Versión y loader ---
+      TYPE: FABRIC
+      VERSION: "26.3"
+
+      # --- Mods (solo los del lado del servidor) ---
+      # Se descargan solos de Modrinth al arrancar, filtrados por 26.3 + Fabric
+      MODRINTH_PROJECTS: |
+        fabric-api
+        lithium
+        ferrite-core
+        chunky
+      MODRINTH_DOWNLOAD_DEPENDENCIES: required
+
+      # --- Memoria y JVM ---
+      # 2.5 GB: deja espacio en la Pi para el sistema y el backend de EcoBytes
+      MEMORY: 2560M
+      USE_AIKAR_FLAGS: "true"
+
+      # --- Rendimiento (lo que más alivia la CPU de la Pi) ---
+      VIEW_DISTANCE: 8
+      SIMULATION_DISTANCE: 6
+
+      # --- Partida ---
+      MOTD: "Servidor de Gerardo"
+      DIFFICULTY: normal
+      MAX_PLAYERS: 5
+    volumes:
+      - ./data:/data
