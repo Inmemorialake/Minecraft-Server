@@ -39,6 +39,20 @@ services:
       VIEW_DISTANCE: 8
       SIMULATION_DISTANCE: 6
 
+      # --- Cuentas ---
+      # Sin verificación con Mojang: permite cuentas sin premium.
+      # OJO: cualquiera que llegue al servidor puede entrar con cualquier
+      # nombre (incluido el de un operador). Seguro solo mientras el puerto
+      # NO esté expuesto a internet (acceso únicamente por Tailscale/LAN).
+      ONLINE_MODE: "FALSE"
+      # Las cuentas sin premium no tienen claves de chat firmadas por Mojang;
+      # sin esto, el servidor las expulsa al conectarse o al chatear
+      ENFORCE_SECURE_PROFILE: "FALSE"
+
+      # --- Pausa cuando está vacío (nativa desde 1.21.2, default: 60 s) ---
+      # Descomentar mientras Chunky pregenera, para que no se pause sin jugadores
+      # PAUSE_WHEN_EMPTY_SECONDS: 0
+
       # --- Partida ---
       MOTD: "Servidor de Gerardo"
       DIFFICULTY: normal

@@ -59,6 +59,12 @@ Por **Tailscale**, sin abrir puertos en el router:
 2. Cada jugador instala Tailscale y acepta la invitación.
 3. En Minecraft: **Multijugador → Agregar servidor** → `<IP-tailscale-de-la-pi>:25565` (o el nombre MagicDNS de la Pi).
 
+### Modo offline
+
+El servidor corre con `ONLINE_MODE=FALSE` para aceptar cuentas sin premium. Eso significa que **no verifica identidades**: cualquiera que llegue al puerto puede entrar con cualquier nombre de usuario, incluido el de un operador, y la whitelist solo compara nombres.
+
+La seguridad depende de que el puerto **nunca** se exponga a internet (nada de port forwarding en el router ni Tailscale Funnel para este servicio). Solo deben poder llegar los dispositivos de la tailnet y de la red de la casa.
+
 ## Respaldos
 
 El mundo vive en `data/world/`. Para un respaldo consistente:
