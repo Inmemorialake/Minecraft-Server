@@ -23,11 +23,15 @@ services:
 
       # --- Mods (solo los del lado del servidor) ---
       # Se descargan solos de Modrinth al arrancar, filtrados por 26.3 + Fabric
+      # c2me-fabric:alpha = acepta builds alpha, que es como C2ME suele publicar
+      # scalablelux? = opcional: si no hay versión para 26.3, solo avisa en el log
       MODRINTH_PROJECTS: |
         fabric-api
         lithium
         ferrite-core
         chunky
+        c2me-fabric:alpha
+        scalablelux?
       MODRINTH_DOWNLOAD_DEPENDENCIES: required
 
       # --- Memoria y JVM ---
@@ -52,6 +56,13 @@ services:
       # --- Pausa cuando está vacío (nativa desde 1.21.2, default: 60 s) ---
       # Descomentar mientras Chunky pregenera, para que no se pause sin jugadores
       # PAUSE_WHEN_EMPTY_SECONDS: 0
+
+      # --- Mundo ---
+      # La seed solo se aplica al CREAR un mundo; cambiarla no afecta uno existente.
+      # Para usarla en un mundo nuevo sin borrar el actual, cambiar también LEVEL
+      # (nombre de la carpeta dentro de data/, por defecto "world").
+      # SEED: ""
+      # LEVEL: world
 
       # --- Partida ---
       MOTD: "Servidor de Gerardo"
